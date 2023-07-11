@@ -25,10 +25,9 @@ router.post('/:id/delete', (req, res) => {
     jSend(res, server.deleteUser(req.params.id));
 });
 
-router.patch('/:id/update/:field/with/:value', (req, res) => {
+router.put('/:id', (req, res) => {
     try {
-        const { id, field, value } = req.params;
-        jSend(res, server.editField(id, field, value));
+        jSend(res, server.editUser(req.params.id, req.body));
     } catch ({ message }) {
         res.status(500).end(message);
     }

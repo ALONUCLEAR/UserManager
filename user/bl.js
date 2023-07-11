@@ -30,9 +30,16 @@ const getUser = (id) => {
     return user;
 }
 
-const editField = (id, fieldName, newValue) => {
+const editUser = (id, { username, email, password, role }) => {
+    const index = users.findIndex(user => user.id === id);
     const user = getUser(id);
-    user[fieldName] = newValue;
+
+    if (username) { user.username = username; }
+    if (email) { user.email = email; }
+    if (password) { user.password = password; }
+    if (role) { user.role = role; }
+
+    users[index] = { ...users };
 
     return user;
 }
@@ -40,6 +47,6 @@ const editField = (id, fieldName, newValue) => {
 module.exports = {
     createUser,
     deleteUser,
-    editField,
+    editUser,
     getUser
 }
