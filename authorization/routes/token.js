@@ -1,8 +1,13 @@
 var express = require('express');
 var router = express.Router();
+const jwt = require('jsonwebtoken');
 
 const database = {
-    isValidToken: (id, token) => id == token.id,
+    isValidToken: (id, token) => {
+        jwt.verify(token, "123456", function(err, decoded) {
+            return decoded.id === id;
+        });
+    },
 };
 
 /* is Token Valid */
