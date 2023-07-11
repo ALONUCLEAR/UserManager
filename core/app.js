@@ -3,9 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require("mongoose");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/user');
+
+const hostname = "localhost";
+const port = 5555;
 
 var app = express();
 
@@ -19,8 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,5 +39,26 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+app.listen(port, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+  });
+
+  const mongoDB =
+  "mongodb+srv://mongo_user:Aa123456@cluster0.atn0ioc.mongodb.net/";
+mongoose
+  .connect(mongoDB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: "cluster0",
+  })
+  .then(() => {
+    console.log("MongoDB connection open");
+  })
+  .catch((err) => {
+    console.log("Error connecting to MongoDB: " + err);
+  });
+
 
 module.exports = app;
