@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const server = require('../mockCore');
+const server = require('../bl');
 
 const jSend = (res, obj) => res.end(JSON.stringify(obj));
 

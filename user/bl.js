@@ -1,4 +1,4 @@
-let { users } = require('./users');
+let { users } = require('./mockUsers');
 
 const createUser = (id, username, email, password, role) => {
     try {
