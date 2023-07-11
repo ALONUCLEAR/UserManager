@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package userService;
+
+service UserService {
+  rpc getUserById(UserByIdRequest) returns (User) {}
+  rpc updateUser(UpdateUserRequest) returns (User) {}
+  rpc createUser(CreateUserRequest) returns (User) {}
+  rpc setPasswordById(SetPasswordRequest) returns (User) {}
+  rpc setRole(SetRoleRequest) returns (User) {}
+}
+
+message UserByIdRequest {
+  string userId = 1;
+}
+
+message UpdateUserRequest {
+  string userId = 1;
+  User user = 2;
+}
+
+message CreateUserRequest {
+  User user = 1;
+}
+
+message SetPasswordRequest {
+  string userId = 1;
+  string password = 2;
+}
+
+message SetRoleRequest {
+  string userId = 1;
+  string role = 2;
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+  string role = 5;
+}
