@@ -3,9 +3,9 @@ var router = express.Router();
 const {getUserByID, createUser, changeRoleByUserId, changePasswordByUserId, deleteUserByID} = require("../controllers/user");
 
 /* GET users listing. */
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
-      const user = await getUserByID(req.body.user);
+      const user = await getUserByID(req.params.id);
       res.status(200).send(user);
     } catch (err) {
       res.status(500).send("error when getting user: " + err);
