@@ -1,10 +1,16 @@
 let { users } = require('./users');
 
 const createUser = (id, username, email, password, role) => {
-    const user = { id, username, email, password, role };
-    users.push(user);
+    try {
+        getUser(id);
+    } catch {
+        const user = { id, username, email, password, role };
+        users.push(user);
 
-    return user;
+        return user;
+    }
+
+    throw new Error("User already exists");
 }
 
 const deleteUser = (id) => {
@@ -15,7 +21,13 @@ const deleteUser = (id) => {
 
 
 const getUser = (id) => {
-    return users.find(user => user.id === id);
+    const user = users.find(user => user.id === id);
+
+    if (!user) {
+        throw new Error("No user with this ID exists");
+    }
+
+    return user;
 }
 
 const editField = (id, fieldName, newValue) => {

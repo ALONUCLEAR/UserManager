@@ -5,12 +5,20 @@ const server = require('../mockCore');
 const jSend = (res, obj) => res.end(JSON.stringify(obj));
 
 router.get('/:id', (req, res) => {
-    jSend(res, server.getUser(req.params.id));
+    try {
+        jSend(res, server.getUser(req.params.id));
+    } catch ({ message }) {
+        res.status(500).end(message);
+    }
 });
 
 router.post('', (req, res) => {
-    const { id, username, email, password, role } = req.body;
-    jSend(res, server.createUser(id, username, email, password, role));
+    try {
+        const { id, username, email, password, role } = req.body;
+        jSend(res, server.createUser(id, username, email, password, role));
+    } catch ({ message }) {
+        res.status(500).end(message);
+    }
 });
 
 router.post('/:id/delete', (req, res) => {
@@ -18,8 +26,12 @@ router.post('/:id/delete', (req, res) => {
 });
 
 router.patch('/:id/update/:field/with/:value', (req, res) => {
-    const { id, field, value } = req.params;
-    jSend(res, server.editField(id, field, value));
+    try {
+        const { id, field, value } = req.params;
+        jSend(res, server.editField(id, field, value));
+    } catch ({ message }) {
+        res.status(500).end(message);
+    }
 })
 
 module.exports = router;
