@@ -1,16 +1,23 @@
 {
-  "name": "user",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
-  "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.1"
-  }
+    "name": "user",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node ./bin/www",
+        "generate-grpc": "grpc_tools_node_protoc --js_out=import_style=commonjs,binary:. --grpc_out=. --plugin=protoc-gen-grpc=./node_modules/grpc-tools/bin/grpc_node_plugin"
+    },
+    "dependencies": {
+        "@grpc/grpc-js": "^1.8.17",
+        "axios": "^1.4.0",
+        "cookie-parser": "~1.4.4",
+        "debug": "~2.6.9",
+        "express": "~4.16.1",
+        "http-errors": "~1.6.3",
+        "jade": "~1.11.0",
+        "morgan": "~1.9.1",
+        "protobufjs": "^7.2.4"
+    },
+    "devDependencies": {
+        "grpc-tools": "^1.12.4"
+    }
 }
